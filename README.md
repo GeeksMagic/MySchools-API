@@ -1,0 +1,1 @@
+# MySchools-API
