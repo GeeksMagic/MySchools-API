@@ -1,12 +1,15 @@
 package com.gmt.myschool.responses;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class MessageResponse extends SuperResponse{
 
-	private String message;
+	@JsonProperty
+	private String message = null;
 	
 	public MessageResponse() {
 		super();
-		this.message = "";
+		this.message = null;
 	}
 	
 	public MessageResponse(String message) {

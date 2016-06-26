@@ -9,7 +9,7 @@ public class Welcome {
 	@RequestMapping("/welcome")
 	public String doWelcome(){
 		//Response.status(Status.ACCEPTED).build();
-		return "Welcome to My School";
+		return "{\"data\":\"Welcome to My School\"}";
 	}
 	
 }

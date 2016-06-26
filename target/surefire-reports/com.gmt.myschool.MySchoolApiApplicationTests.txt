@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.gmt.myschool.MySchoolApiApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 32.949 sec - in com.gmt.myschool.MySchoolApiApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 33.554 sec - in com.gmt.myschool.MySchoolApiApplicationTests

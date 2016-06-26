@@ -1,9 +1,13 @@
 package com.gmt.myschool.requests;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class LoginRequest {
 
+	@JsonProperty
 	private String username;
 	
+	@JsonProperty
 	private String password;
 
 	public String getUsername() {
