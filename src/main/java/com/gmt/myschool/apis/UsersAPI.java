@@ -22,47 +22,52 @@ import com.gmt.myschool.responses.LoginResponse;
 import com.gmt.myschool.responses.MessageResponse;
 import com.gmt.myschool.responses.SuperResponse;
 
+import io.swagger.annotations.ApiOperation;
+
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 @Produces(MediaType.APPLICATION_JSON)
-public class UserAPI {
+public class UsersAPI {
 
 	@Autowired
 	private UserRepository userRepository;
 
+	@ApiOperation(value = "Get All Users")
 	@RequestMapping(method = RequestMethod.GET, value = "/all")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public @ResponseBody List<UserDao> getAllUsers() {
 		return userRepository.findAll();
 	}
 
+	@ApiOperation(value = "Login User")
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public @ResponseBody SuperResponse getOne(@RequestBody LoginRequest req) {
-		try{
-		UserDao foundUser = null;
-		for (UserDao user : getAllUsers()) {
-			if (user.getUsername().equalsIgnoreCase(req.getUsername())) {
-				foundUser = user;
-				break;
+		try {
+			UserDao foundUser = null;
+			for (UserDao user : getAllUsers()) {
+				if (user.getUsername().equalsIgnoreCase(req.getUsername())) {
+					foundUser = user;
+					break;
+				}
 			}
-		}
-		if (foundUser == null)
-			return new MessageResponse("Invalid Username");
-		else {
-			if (foundUser.getPassword().equals(req.getPassword())) {
-				return new LoginResponse(foundUser);
-			} else {
-				return new MessageResponse("Invalid Password");
+			if (foundUser == null)
+				return new MessageResponse("Invalid Username");
+			else {
+				if (foundUser.getPassword().equals(req.getPassword())) {
+					return new LoginResponse(foundUser);
+				} else {
+					return new MessageResponse("Invalid Password");
+				}
 			}
+		} catch (Exception e) {
+			return new MessageResponse("Error Finding User:" + e.getMessage());
 		}
-		}catch(Exception e){
-			return new MessageResponse("Error Finding User:"+e.getMessage());
-		}
-		
+
 	}
 
+	@ApiOperation(value = "Get One User")
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public @ResponseBody SuperResponse getOne(@PathVariable("id") long id) {
@@ -77,12 +82,14 @@ public class UserAPI {
 		}
 	}
 
+	@ApiOperation(value = "Add New User OR Update Existing User")
 	@RequestMapping(method = RequestMethod.POST, value = "/addorupdate")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public @ResponseBody UserDao createOrUpdate(@RequestBody UserDao users) {
 		return userRepository.save(users);
 	}
 
+	@ApiOperation(value = "Delete One User")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public @ResponseBody SuperResponse delete(@PathVariable("id") long id) {

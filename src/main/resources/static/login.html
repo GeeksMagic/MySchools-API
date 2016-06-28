@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>GeeksMagic</title>
+<link rel="stylesheet" href="normalize.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<section class="loginform cf">
+		<h3>GeeksMagic Technologies Pvt Ltd</h3>
+		<div th:if="${param.error}">Invalid username and password.</div>		
+		<form th:action="@{/validate}" method="post" th:object="${data}">
+			<ul>
+				<li><label for="usermail">Email</label> <input type="email"
+					name="usermail" placeholder="yourname@email.com" required th:field="*{email}" >
+				</li>
+				<li><label for="password">Password</label> <input
+					type="password" name="password" placeholder="password" required th:field="*{password}" >
+				</li>
+				<li><input type="submit" value="Login"></li>
+			</ul>
+		</form>
+	</section>
+</body>
+</html>
